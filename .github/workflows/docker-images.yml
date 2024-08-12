@@ -2,11 +2,9 @@ name: Docker Images
 
 on:
   workflow_dispatch:
-    branches:
-      - mmdev1
   push:
-    branches:
-      - mmdev1
+    tags:
+      - 'mm*'
 
 env:
   ORG: bobanetwork
