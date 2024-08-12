@@ -31,11 +31,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-#      - name: DockerHub login
-#        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-#        with:
-#          username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
+      - name: DockerHub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
 
       - name: Metadata
         id: meta
@@ -60,11 +60,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-#      - name: DockerHub login
-#        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-#        with:
-#          username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
+      - name: DockerHub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
 
       - name: Metadata
         id: meta
