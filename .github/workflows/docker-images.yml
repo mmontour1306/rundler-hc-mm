@@ -49,7 +49,6 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          target: rundler-hc
           push: false
           tags: ${{ env.ORG }}/rundler-hc:latest
 
@@ -71,7 +70,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./hybrid-compute
-          file: Dockerfile.offchain-rpc
-          target: offchain-rpc
+          file: ./Dockerfile.offchain-rpc
           push: false
           tags: ${{ env.ORG }}/offchain-rpc:latest
