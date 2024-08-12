@@ -3,13 +3,8 @@ name: Docker Images
 on:
   workflow_dispatch:
   push:
-    branches:
-      - 'mmdev1'
     tags:
       - '*'
-
-env:
-  ORG: bobanetwork
 
 jobs:
   publish-images:
