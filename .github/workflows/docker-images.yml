@@ -51,7 +51,7 @@ jobs:
           file: Dockerfile
           target: rundler-hc
           push: false
-          tags: ${{ env.ORG }}/rundler-hc:${{ needs.publish-images.outputs.docker-tag }}
+          tags: ${{ env.ORG }}/rundler-hc:latest
 
   offchain-rpc:
     name: Publish offchain-rpc version ${{ needs.publish-images.outputs.docker-tag }}
@@ -74,4 +74,4 @@ jobs:
           file: Dockerfile.offchain-rpc
           target: offchain-rpc
           push: false
-          tags: ${{ env.ORG }}/offchain-rpc:${{ needs.publish-images.outputs.docker-tag }}
+          tags: ${{ env.ORG }}/offchain-rpc:latest
