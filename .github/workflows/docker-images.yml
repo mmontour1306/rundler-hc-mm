@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
   rundler-hc:
-    name: Publish rundler-hc version ${{ needs.publish-images.outputs.docker-tag }}
+    name: Publish rundler-hc
     runs-on: ubuntu-latest
     
     steps:
@@ -54,11 +54,11 @@ jobs:
           context: .
           file: Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.output.tags }}
-          labels: ${{ steps.meta.output.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
   offchain-rpc:
-    name: Publish offchain-rpc version ${{ needs.publish-images.outputs.docker-tag }}
+    name: Publish offchain-rpc
     runs-on: ubuntu-latest
     
     steps:
@@ -86,5 +86,5 @@ jobs:
           context: ./hybrid-compute
           file: hybrid-compute/Dockerfile.offchain-rpc
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.output.tags }}
-          labels: ${{ steps.meta.output.labels }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
