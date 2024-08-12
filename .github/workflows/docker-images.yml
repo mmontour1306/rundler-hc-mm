@@ -2,11 +2,10 @@ name: Docker Images
 
 on:
   workflow_dispatch:
-    inputs:
-      customImageName:
-        description: 'Custom Image Tag'
-        required: true
-        default: '0.0.0-rc0'
+  push:
+    branches:
+      - mmdev1
+
 env:
   ORG: bobanetwork
 
@@ -28,7 +27,8 @@ jobs:
         run: |
           echo "::set-output name=docker-tag::custom-${CUSTOM_IMAGE_NAME}"
         env:
-          CUSTOM_IMAGE_NAME: ${{ github.event.inputs.customImageName }}
+#          CUSTOM_IMAGE_NAME: ${{ github.event.inputs.customImageName }}
+          CUSTOM_IMAGE_NAME: test0.0.0-rc0
 
   rundler-hc:
     name: Publish rundler-hc version ${{ needs.publish-images.outputs.docker-tag }}
