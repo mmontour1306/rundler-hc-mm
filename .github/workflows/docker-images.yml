@@ -11,7 +11,7 @@ env:
   ORG: bobanetwork
 
 jobs:
-  publish-images
+  publish-images:
     name: Publish Images
     runs-on: ubuntu-latest
     outputs:
