@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'mm*'
+      - '*'
 
 env:
   ORG: bobanetwork
@@ -48,7 +48,7 @@ jobs:
         with:
           context: .
           file: Dockerfile
-          push: false
+          push: true
           tags: ${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.output.labels }}
 
@@ -77,6 +77,6 @@ jobs:
         with:
           context: ./hybrid-compute
           file: hybrid-compute/Dockerfile.offchain-rpc
-          push: false
+          push: true
           tags: ${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.output.labels }}
