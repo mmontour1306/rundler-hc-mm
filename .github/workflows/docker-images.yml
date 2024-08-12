@@ -2,6 +2,11 @@ name: Docker Images
 
 on:
   workflow_dispatch:
+    inputs:
+      custom_tag:
+        required: true
+        type: string
+        default: '0.0.0-rc0'
   push:
     branches:
       - mmdev1
@@ -22,13 +27,8 @@ jobs:
         uses: actions/checkout/@v4
         with:
           fetch-depth: 0
-      - name: Docker Image Name
-        id: docker-image-name
-        run: |
-          echo "::set-output name=docker-tag::custom-${CUSTOM_IMAGE_NAME}"
-        env:
-#          CUSTOM_IMAGE_NAME: ${{ github.event.inputs.customImageName }}
-          CUSTOM_IMAGE_NAME: test0.0.0-rc0
+      - name: tag-test
+        run: echo ${{ inputs.custom_tag }}
 
   rundler-hc:
     name: Publish rundler-hc version ${{ needs.publish-images.outputs.docker-tag }}
@@ -51,7 +51,7 @@ jobs:
           images: bobanetwork/rundler-hc
 
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
           file: Dockerfile
