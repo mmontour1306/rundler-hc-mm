@@ -3,6 +3,8 @@ name: Docker Images
 on:
   workflow_dispatch:
   push:
+    branches:
+      - 'mmdev1'
     tags:
       - '*'
 
@@ -32,23 +34,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: DockerHub login
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
 
       - name: Metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: bobanetwork/rundler-hc
+          tags: |
+            type=ref,event=tag
+            type=sha
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.output.labels }}
 
@@ -61,22 +66,25 @@ jobs:
         uses: actions/checkout@v4
 
       - name: DockerHub login
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN_SECRET }}
 
       - name: Metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: bobanetwork/offchain-rpc
+          tags: |
+            type=ref,event=tag
+            type=sha
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: ./hybrid-compute
           file: hybrid-compute/Dockerfile.offchain-rpc
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.output.labels }}
